@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{6caf234a-abb2-44e2-b490-329e05dc0bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\utility">
+      <UniqueIdentifier>{c15d4dbb-67e5-4ff2-9fd4-a051f587c4e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\utility\logging">
+      <UniqueIdentifier>{98ed830d-799c-48b8-abc8-c74b5de85335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sound">
+      <UniqueIdentifier>{34290768-fe11-4897-88ab-fec42c562653}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\SoundScape.cpp" />
+    <ClCompile Include="..\src\core\utility\logging\ConsoleLogger.cpp">
+      <Filter>core\utility\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\utility\logging\FileLogger.cpp">
+      <Filter>core\utility\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\utility\logging\Logger.cpp">
+      <Filter>core\utility\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\utility\logging\LogManager.cpp">
+      <Filter>core\utility\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\utility\logging\LogManagerImplementation.cpp">
+      <Filter>core\utility\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\utility\logging\PlainFileLogger.cpp">
+      <Filter>core\utility\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\sound\WaveExtractor.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\SoundScape.h" />
+    <ClInclude Include="..\src\core\utility\logging\ConsoleLogger.h">
+      <Filter>core\utility\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\utility\logging\FileLogger.h">
+      <Filter>core\utility\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\utility\logging\Logger.h">
+      <Filter>core\utility\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\utility\logging\logging.h">
+      <Filter>core\utility\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\utility\logging\LogManager.h">
+      <Filter>core\utility\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\utility\logging\LogManagerImplementation.h">
+      <Filter>core\utility\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\utility\logging\LogMessage.h">
+      <Filter>core\utility\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\utility\logging\PlainFileLogger.h">
+      <Filter>core\utility\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\sound\WaveExtractor.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
