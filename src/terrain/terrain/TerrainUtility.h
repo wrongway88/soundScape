@@ -85,14 +85,14 @@ public:
 
 
 
-	static float interpolate(ci::Vec2f& position, ci::Vec2f& vertex00, ci::Vec2f& vertex11, float value00, float value10, float value01, float value11);
+	static float interpolate(ci::vec2& position, ci::vec2& vertex00, ci::vec2& vertex11, float value00, float value10, float value01, float value11);
 	/**
 	 *@note vertex000 has to be the cubes vertex at -x, -y, -z and vertex111 the vertex at +x, +y, +z
 	 */
-	static float interpolate(ci::Vec3f& position, ci::Vec3f& vertex000, ci::Vec3f& vertex111, CubeCornerValues& cubeCornerValues);
+	static float interpolate(ci::vec3& position, ci::vec3& vertex000, ci::vec3& vertex111, CubeCornerValues& cubeCornerValues);
 
-	static ci::Vec2f calculateFaceSaddlePoint(ci::Vec2f& vertex00, ci::Vec2f& vertex11, float value00, float value10, float value01, float value11);
-	static std::vector<ci::Vec3f> calculateBodySaddlePoints(ci::Vec3f& vertex000, ci::Vec3f& vertex111, CubeCornerValues& cubeCornerValues);
+	static ci::vec2 calculateFaceSaddlePoint(ci::vec2& vertex00, ci::vec2& vertex11, float value00, float value10, float value01, float value11);
+	static std::vector<ci::vec3> calculateBodySaddlePoints(const ci::vec3& vertex000, const ci::vec3& vertex111, const CubeCornerValues& cubeCornerValues);
 };
 
 #endif

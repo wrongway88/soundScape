@@ -7,17 +7,17 @@ class Triangle
 {
 public:
 	Triangle();
-	Triangle(const ci::Vec3f& v0, const ci::Vec3f& v1, const ci::Vec3f& v2);
+	Triangle(const ci::vec3& v0, const ci::vec3& v1, const ci::vec3& v2);
 	~Triangle();
 
-	ci::Vec3f getVertex0()const;
-	ci::Vec3f getVertex1()const;
-	ci::Vec3f getVertex2()const;
+	ci::vec3 getVertex0()const;
+	ci::vec3 getVertex1()const;
+	ci::vec3 getVertex2()const;
 
 private:
-	ci::Vec3f m_vertex0;
-	ci::Vec3f m_vertex1;
-	ci::Vec3f m_vertex2;
+	ci::vec3 m_vertex0;
+	ci::vec3 m_vertex1;
+	ci::vec3 m_vertex2;
 };
 
 #endif

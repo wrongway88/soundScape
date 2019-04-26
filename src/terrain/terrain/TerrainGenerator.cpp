@@ -15,9 +15,9 @@ TerrainGenerator::~TerrainGenerator()
 
 Terrain* TerrainGenerator::generateTerrain(IDensityFunction& densityFunction, float terrainSize, float cellSize)
 {
-	std::vector<ci::Vec3f> vertices;
+	std::vector<ci::vec3> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<ci::Vec3f> normals;
+	std::vector<ci::vec3> normals;
 
 	std::map<int, Edge> edges;
 
@@ -31,12 +31,12 @@ Terrain* TerrainGenerator::generateTerrain(IDensityFunction& densityFunction, fl
 				/*if(yPos == 0.0f && xPos == 24.0f && zPos == -32.0f)
 					std::cout << "foo" << std::endl;*/
 
-				Cell cell(ci::Vec3f(xPos, yPos, zPos), cellSize);
+				Cell cell(ci::vec3(xPos, yPos, zPos), cellSize);
 				cell.sampleTerrain(densityFunction, edges, terrainSize);
 
-				std::vector<ci::Vec3f> cellVertices = cell.getVertices();
+				std::vector<ci::vec3> cellVertices = cell.getVertices();
 				std::vector<unsigned int> cellIndices = cell.getIndices();
-				std::vector<ci::Vec3f> cellNormals = cell.getNormals();
+				std::vector<ci::vec3> cellNormals = cell.getNormals();
 
 				addTriangles(vertices, indices, normals, cellVertices, cellIndices, cellNormals);
 			}
@@ -47,11 +47,11 @@ Terrain* TerrainGenerator::generateTerrain(IDensityFunction& densityFunction, fl
 	return terrain;
 }
 
-Terrain* TerrainGenerator::generateTerrain(IDensityFunction& densityFunction, float terrainSize, float cellSize, const ci::Vec3i& seedCell)
+Terrain* TerrainGenerator::generateTerrain(IDensityFunction& densityFunction, float terrainSize, float cellSize, const ci::vec3& seedCell)
 {
-	std::vector<ci::Vec3f> vertices;
+	std::vector<ci::vec3> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<ci::Vec3f> normals;
+	std::vector<ci::vec3> normals;
 
 	m_visitedCellsSize = int(terrainSize/cellSize);
 	initializeVisitedCells(m_visitedCellsSize);
@@ -60,8 +60,8 @@ Terrain* TerrainGenerator::generateTerrain(IDensityFunction& densityFunction, fl
 	float yPos = (float)seedCell.y * cellSize - (0.5f * terrainSize) + (cellSize * 0.5f);
 	float zPos = (float)seedCell.z * cellSize - (0.5f * terrainSize) + (cellSize * 0.5f);
 
-	std::list<ci::Vec3f> cellCenters;
-	cellCenters.push_back(ci::Vec3f(xPos, yPos, zPos));
+	std::list<ci::vec3> cellCenters;
+	cellCenters.push_back(ci::vec3(xPos, yPos, zPos));
 	m_visitedCells[seedCell.x][seedCell.y][seedCell.z] = true;
 
 	std::map<int, Edge> edges;
@@ -71,15 +71,15 @@ Terrain* TerrainGenerator::generateTerrain(IDensityFunction& densityFunction, fl
 		Cell cell(cellCenters.front(), cellSize);
 		cell.sampleTerrain(densityFunction, edges, terrainSize);
 
-		std::vector<ci::Vec3f> cellVertices = cell.getVertices();
+		std::vector<ci::vec3> cellVertices = cell.getVertices();
 		std::vector<unsigned int> cellIndices = cell.getIndices();
-		std::vector<ci::Vec3f> cellNormals = cell.getNormals();
+		std::vector<ci::vec3> cellNormals = cell.getNormals();
 
 		addTriangles(vertices, indices, normals, cellVertices, cellIndices, cellNormals);
 		
 		cellCenters.pop_front();
 
-		std::vector<ci::Vec3f> activeNeighbours = cell.getActiveNeighbourCenters();
+		std::vector<ci::vec3> activeNeighbours = cell.getActiveNeighbourCenters();
 		for(unsigned int i = 0; i < activeNeighbours.size(); i++)
 		{
 			int x = int((activeNeighbours[i].x + (terrainSize * 0.5f)) / cellSize);
@@ -111,9 +111,9 @@ Terrain* TerrainGenerator::generateTerrain(IDensityFunction& densityFunction, fl
 	return terrain;
 }
 
-ci::Vec3i TerrainGenerator::findSeedCell(IDensityFunction& densityFunction, float terrainSize, float cellSize)
+ci::vec3 TerrainGenerator::findSeedCell(IDensityFunction& densityFunction, float terrainSize, float cellSize)
 {
-	ci::Vec3i result(0, 0, 0);
+	ci::vec3 result(0, 0, 0);
 
 	float halfTerrainSize = terrainSize * 0.5f;
 	float halfCellSize = cellSize * 0.5f;
@@ -123,7 +123,7 @@ ci::Vec3i TerrainGenerator::findSeedCell(IDensityFunction& densityFunction, floa
 		{
 			for(float yPos = -halfTerrainSize + halfCellSize; yPos < halfTerrainSize; yPos += cellSize)
 			{
-				Cell cell(ci::Vec3f(xPos, yPos, zPos), cellSize);
+				Cell cell(ci::vec3(xPos, yPos, zPos), cellSize);
 				unsigned int vertexCase = cell.calculateVertexCase(densityFunction);
 
 				if(vertexCase > 0 && vertexCase < 255)
@@ -170,14 +170,14 @@ void TerrainGenerator::initializeVisitedCells(int size)
 	}
 }
 
-void TerrainGenerator::addTriangles(std::vector<ci::Vec3f>& vertices, std::vector<unsigned int>& indices, std::vector<ci::Vec3f>& normals,
-									std::vector<ci::Vec3f>& cellVertices, std::vector<unsigned int>& cellIndices, std::vector<ci::Vec3f>& cellNormals)
+void TerrainGenerator::addTriangles(std::vector<ci::vec3>& vertices, std::vector<unsigned int>& indices, std::vector<ci::vec3>& normals,
+									std::vector<ci::vec3>& cellVertices, std::vector<unsigned int>& cellIndices, std::vector<ci::vec3>& cellNormals)
 {
 	for(unsigned int i = 0; i < cellIndices.size(); i++)
 	{
 		int currentIdx = cellIndices[i];
 
-		int vIdx = StlVectorUtility::find<ci::Vec3f>(vertices, cellVertices[currentIdx]);
+		int vIdx = StlVectorUtility::find<ci::vec3>(vertices, cellVertices[currentIdx]);
 		if(vIdx > -1)
 		{
 			indices.push_back(vIdx);

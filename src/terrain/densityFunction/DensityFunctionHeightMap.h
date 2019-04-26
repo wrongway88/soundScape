@@ -18,7 +18,7 @@ public:
 	DensityFunctionHeightMap();
 	~DensityFunctionHeightMap();
 
-	float getValue(ci::Vec3f& position) const;
+	float getValue(const ci::vec3& position) const;
 
 	void setTerrainSize(const float terrainSize);
 	void loadHeightMap(const std::string& file);
@@ -27,7 +27,7 @@ public:
 	void setAltitudeScale(const float altitudeScale);
 
 private:
-	ci::Vec2f m_terrainSize;
+	ci::vec2 m_terrainSize;
 	ci::Surface32f m_heightMap;
 
 	float m_altitudeScale;

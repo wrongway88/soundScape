@@ -9,7 +9,7 @@ public:
 	template <class T>
 	static int find(const std::vector<T>& vector, T value)
 	{
-		std::vector<T>::const_iterator it = std::find(vector.begin(), vector.end(), value);
+		typename std::vector<T>::const_iterator it = std::find(vector.begin(), vector.end(), value);
 	
 		if(it != vector.end())
 		{

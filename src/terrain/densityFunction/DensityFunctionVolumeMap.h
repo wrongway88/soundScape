@@ -14,7 +14,7 @@ public:
 	DensityFunctionVolumeMap();
 	~DensityFunctionVolumeMap();
 
-	float getValue(ci::Vec3f& position) const;
+	float getValue(const ci::vec3& position) const;
 
 	void setTerrainSize(const float terrainSize);
 	/**
@@ -23,9 +23,9 @@ public:
 	void loadMaps(std::vector<std::string>& maps);
 
 private:
-	float getMapValue(const ci::Vec2f& position, const ci::Surface32f& map) const;
+	float getMapValue(const ci::vec2& position, const ci::Surface32f& map) const;
 
-	ci::Vec2f m_terrainSize;
+	ci::vec2 m_terrainSize;
 	std::vector<ci::Surface32f> m_maps;
 };
 

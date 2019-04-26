@@ -52,28 +52,28 @@ void Shader::setUniform(const std::string& name, float value)
 	glUniform1f(location, value);
 }
 
-void Shader::setUniform(const std::string& name, const ci::Vec3f& value)
+void Shader::setUniform(const std::string& name, const ci::vec3& value)
 {
 	GLuint location = glGetUniformLocation( m_GlslProgram, name.c_str() );
 	glUniform3f(location, value.x, value.y, value.z);
 }
 
-void Shader::setUniform(const std::string& name, const ci::Vec4f& value)
+void Shader::setUniform(const std::string& name, const ci::vec4& value)
 {
 	GLuint location = glGetUniformLocation( m_GlslProgram, name.c_str() );
 	glUniform4f(location, value.x, value.y, value.z, value.w);
 }
 
-void Shader::setUniform(const std::string& name, const ci::Matrix33f& value, bool transpose)
+void Shader::setUniform(const std::string& name, const ci::mat3& value, bool transpose)
 {
 	GLuint location = glGetUniformLocation( m_GlslProgram, name.c_str() );
-	glUniformMatrix3fv(location, 1, transpose, &value[0]);
+	glUniformMatrix3fv(location, 1, transpose, &value[0][0]);
 }
 
-void Shader::setUniform(const std::string& name, const ci::Matrix44f& value, bool transpose)
+void Shader::setUniform(const std::string& name, const ci::mat4& value, bool transpose)
 {
 	GLuint location = glGetUniformLocation( m_GlslProgram, name.c_str() );
-	glUniformMatrix4fv(location, 1, transpose, &value[0]);
+	glUniformMatrix4fv(location, 1, transpose, &value[0][0]);
 }
 
 void Shader::bindAttribute(const GLuint index, const std::string& name)

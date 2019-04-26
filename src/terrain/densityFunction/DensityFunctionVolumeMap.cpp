@@ -9,9 +9,9 @@ DensityFunctionVolumeMap::~DensityFunctionVolumeMap()
 {
 }
 
-float DensityFunctionVolumeMap::getValue(ci::Vec3f& position) const
+float DensityFunctionVolumeMap::getValue(const ci::vec3& position) const
 {
-	ci::Vec2f uv((position.x/m_terrainSize.x) + 0.5f, (position.z/m_terrainSize.y) + 0.5f);
+	ci::vec2 uv((position.x/m_terrainSize.x) + 0.5f, (position.z/m_terrainSize.y) + 0.5f);
 	float w = (position.y/m_terrainSize.x) + 0.5f;
 
 	float foo = 1.0f / float(m_maps.size()-1);
@@ -62,7 +62,7 @@ void DensityFunctionVolumeMap::loadMaps(std::vector<std::string>& maps)
 	m_maps.push_back(map);
 }
 
-float DensityFunctionVolumeMap::getMapValue(const ci::Vec2f& position, const ci::Surface32f& map) const
+float DensityFunctionVolumeMap::getMapValue(const ci::vec2& position, const ci::Surface32f& map) const
 {
 	float x = (float)map.getWidth();
 	float y = (float)map.getHeight();
@@ -78,8 +78,8 @@ float DensityFunctionVolumeMap::getMapValue(const ci::Vec2f& position, const ci:
 	int iX1 = (int)x + 1;
 	int iY1 = (int)y + 1;
 
-	float v0 = (map.getPixel(ci::Vec2i(iX0, iY0)).r + map.getPixel(ci::Vec2i(iX1, iY0)).r) * 0.5f;
-	float v1 = (map.getPixel(ci::Vec2i(iX0, iY1)).r + map.getPixel(ci::Vec2i(iX1, iY1)).r) * 0.5f;
+	float v0 = (map.getPixel(ci::vec2(iX0, iY0)).r + map.getPixel(ci::vec2(iX1, iY0)).r) * 0.5f;
+	float v1 = (map.getPixel(ci::vec2(iX0, iY1)).r + map.getPixel(ci::vec2(iX1, iY1)).r) * 0.5f;
 
 	float v2 = (v0 + v1) * 0.5f;
 

@@ -1,6 +1,6 @@
 #include "Cube.h"
 
-Cube::Cube(ci::Vec3f& center, float size):
+Cube::Cube(const ci::vec3& center, const float size):
 	m_center(center),
 	m_size(size),
 	m_halfSize(size * 0.5f)
@@ -12,20 +12,20 @@ Cube::~Cube()
 {
 }
 
-ci::Vec3f Cube::getVertex(const unsigned int index)
+ci::vec3 Cube::getVertex(const unsigned int index)
 {
 	if(index >= 8)
 	{
 		std::stringstream message;
 		message << "Index " << index << " out of range, maximum index is 7";
 		LOG_ERROR(message.str());
-		return ci::Vec3f(0.0f, 0.0f, 0.0f);
+		return ci::vec3(0.0f, 0.0f, 0.0f);
 	}
 
 	return m_vertices[index];
 }
 
-ci::Vec3f Cube::getCenter()
+ci::vec3 Cube::getCenter()
 {
 	return m_center;
 }
@@ -92,9 +92,9 @@ std::vector<unsigned int> Cube::getFaceIndices(unsigned int faceIndex)
 	return result;
 }
 
-std::vector<ci::Vec2f> Cube::getFaceVertices(unsigned int faceIndex)
+std::vector<ci::vec2> Cube::getFaceVertices(unsigned int faceIndex)
 {
-	std::vector<ci::Vec2f> result;
+	std::vector<ci::vec2> result;
 
 	if(faceIndex >= 6)
 	{
@@ -105,7 +105,7 @@ std::vector<ci::Vec2f> Cube::getFaceVertices(unsigned int faceIndex)
 	}
 
 	std::vector<unsigned int> vertexIndices = getFaceIndices(faceIndex);
-	std::vector<ci::Vec3f> vertices;
+	std::vector<ci::vec3> vertices;
 	if(vertexIndices.size() == 4)
 	{
 		vertices.push_back(getVertex(vertexIndices[0]));
@@ -122,40 +122,40 @@ std::vector<ci::Vec2f> Cube::getFaceVertices(unsigned int faceIndex)
 	switch(faceIndex)
 	{
 	case 0:
-		result.push_back(ci::Vec2f(vertices[0].x, vertices[0].y));
-		result.push_back(ci::Vec2f(vertices[1].x, vertices[1].y));
-		result.push_back(ci::Vec2f(vertices[2].x, vertices[2].y));
-		result.push_back(ci::Vec2f(vertices[3].x, vertices[3].y));
+		result.push_back(ci::vec2(vertices[0].x, vertices[0].y));
+		result.push_back(ci::vec2(vertices[1].x, vertices[1].y));
+		result.push_back(ci::vec2(vertices[2].x, vertices[2].y));
+		result.push_back(ci::vec2(vertices[3].x, vertices[3].y));
 		break;
 	case 1:
-		result.push_back(ci::Vec2f(vertices[0].x, vertices[0].z));
-		result.push_back(ci::Vec2f(vertices[1].x, vertices[1].z));
-		result.push_back(ci::Vec2f(vertices[2].x, vertices[2].z));
-		result.push_back(ci::Vec2f(vertices[3].x, vertices[3].z));
+		result.push_back(ci::vec2(vertices[0].x, vertices[0].z));
+		result.push_back(ci::vec2(vertices[1].x, vertices[1].z));
+		result.push_back(ci::vec2(vertices[2].x, vertices[2].z));
+		result.push_back(ci::vec2(vertices[3].x, vertices[3].z));
 		break;
 	case 2:
-		result.push_back(ci::Vec2f(vertices[0].x, vertices[0].y));
-		result.push_back(ci::Vec2f(vertices[1].x, vertices[1].y));
-		result.push_back(ci::Vec2f(vertices[2].x, vertices[2].y));
-		result.push_back(ci::Vec2f(vertices[3].x, vertices[3].y));
+		result.push_back(ci::vec2(vertices[0].x, vertices[0].y));
+		result.push_back(ci::vec2(vertices[1].x, vertices[1].y));
+		result.push_back(ci::vec2(vertices[2].x, vertices[2].y));
+		result.push_back(ci::vec2(vertices[3].x, vertices[3].y));
 		break;
 	case 3:
-		result.push_back(ci::Vec2f(vertices[0].x, vertices[0].z));
-		result.push_back(ci::Vec2f(vertices[1].x, vertices[1].z));
-		result.push_back(ci::Vec2f(vertices[2].x, vertices[2].z));
-		result.push_back(ci::Vec2f(vertices[3].x, vertices[3].z));
+		result.push_back(ci::vec2(vertices[0].x, vertices[0].z));
+		result.push_back(ci::vec2(vertices[1].x, vertices[1].z));
+		result.push_back(ci::vec2(vertices[2].x, vertices[2].z));
+		result.push_back(ci::vec2(vertices[3].x, vertices[3].z));
 		break;
 	case 4:
-		result.push_back(ci::Vec2f(vertices[0].x, vertices[0].z));
-		result.push_back(ci::Vec2f(vertices[1].x, vertices[1].z));
-		result.push_back(ci::Vec2f(vertices[2].x, vertices[2].z));
-		result.push_back(ci::Vec2f(vertices[3].x, vertices[3].z));
+		result.push_back(ci::vec2(vertices[0].x, vertices[0].z));
+		result.push_back(ci::vec2(vertices[1].x, vertices[1].z));
+		result.push_back(ci::vec2(vertices[2].x, vertices[2].z));
+		result.push_back(ci::vec2(vertices[3].x, vertices[3].z));
 		break;
 	case 5:
-		result.push_back(ci::Vec2f(vertices[0].x, vertices[0].z));
-		result.push_back(ci::Vec2f(vertices[1].x, vertices[1].z));
-		result.push_back(ci::Vec2f(vertices[2].x, vertices[2].z));
-		result.push_back(ci::Vec2f(vertices[3].x, vertices[3].z));
+		result.push_back(ci::vec2(vertices[0].x, vertices[0].z));
+		result.push_back(ci::vec2(vertices[1].x, vertices[1].z));
+		result.push_back(ci::vec2(vertices[2].x, vertices[2].z));
+		result.push_back(ci::vec2(vertices[3].x, vertices[3].z));
 		break;
 	default:
 		return result;

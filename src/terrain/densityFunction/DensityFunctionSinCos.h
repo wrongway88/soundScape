@@ -13,7 +13,7 @@ public:
 	DensityFunctionSinCos();
 	~DensityFunctionSinCos();
 
-	float getValue(ci::Vec3f& position) const;
+	float getValue(const ci::vec3& position) const;
 };
 
 #endif

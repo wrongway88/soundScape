@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\core\graphics\MeshBufferObject.cpp" />
+    <ClCompile Include="..\src\core\graphics\Shader.cpp" />
     <ClCompile Include="..\src\core\utility\logging\ConsoleLogger.cpp" />
     <ClCompile Include="..\src\core\utility\logging\FileLogger.cpp" />
     <ClCompile Include="..\src\core\utility\logging\Logger.cpp" />
@@ -27,8 +29,24 @@
     <ClCompile Include="..\src\core\utility\logging\PlainFileLogger.cpp" />
     <ClCompile Include="..\src\SoundScape.cpp" />
     <ClCompile Include="..\src\sound\WaveExtractor.cpp" />
+    <ClCompile Include="..\src\terrain\common\Cube.cpp" />
+    <ClCompile Include="..\src\terrain\common\Triangle.cpp" />
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionHeightMap.cpp" />
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionSinCos.cpp" />
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionSinCosComplex.cpp" />
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionSpectrumSimple.cpp" />
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionVolumeMap.cpp" />
+    <ClCompile Include="..\src\terrain\densityFunction\IDensityFunction.cpp" />
+    <ClCompile Include="..\src\terrain\terrain\Cell.cpp" />
+    <ClCompile Include="..\src\terrain\terrain\LookUpTables.cpp" />
+    <ClCompile Include="..\src\terrain\terrain\Terrain.cpp" />
+    <ClCompile Include="..\src\terrain\terrain\TerrainGenerator.cpp" />
+    <ClCompile Include="..\src\terrain\terrain\TerrainUtility.cpp" />
+    <ClCompile Include="..\src\terrain\utility\StlVectorUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\core\graphics\MeshBufferObject.h" />
+    <ClInclude Include="..\src\core\graphics\Shader.h" />
     <ClInclude Include="..\src\core\utility\logging\ConsoleLogger.h" />
     <ClInclude Include="..\src\core\utility\logging\FileLogger.h" />
     <ClInclude Include="..\src\core\utility\logging\Logger.h" />
@@ -39,6 +57,20 @@
     <ClInclude Include="..\src\core\utility\logging\PlainFileLogger.h" />
     <ClInclude Include="..\src\SoundScape.h" />
     <ClInclude Include="..\src\sound\WaveExtractor.h" />
+    <ClInclude Include="..\src\terrain\common\Cube.h" />
+    <ClInclude Include="..\src\terrain\common\Triangle.h" />
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionHeightMap.h" />
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionSinCos.h" />
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionSinCosComplex.h" />
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionSpectrumSimple.h" />
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionVolumeMap.h" />
+    <ClInclude Include="..\src\terrain\densityFunction\IDensityFunction.h" />
+    <ClInclude Include="..\src\terrain\terrain\Cell.h" />
+    <ClInclude Include="..\src\terrain\terrain\LookUpTables.h" />
+    <ClInclude Include="..\src\terrain\terrain\Terrain.h" />
+    <ClInclude Include="..\src\terrain\terrain\TerrainGenerator.h" />
+    <ClInclude Include="..\src\terrain\terrain\TerrainUtility.h" />
+    <ClInclude Include="..\src\terrain\utility\StlVectorUtility.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

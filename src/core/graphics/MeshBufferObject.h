@@ -9,19 +9,19 @@ public:
 	MeshBufferObject();
 	~MeshBufferObject();
 
-	void bindVertices(const std::vector<ci::Vec3f>& vertices);
+	void bindVertices(const std::vector<ci::vec3>& vertices);
 	void bindVertices(const float* vertices, const int size);
 
 	void bindIndices(const std::vector<unsigned int>& indices);
 	void bindIndices(const int* indices, const int size);
 
-	void bindNormals(const std::vector<ci::Vec3f>& normals);
+	void bindNormals(const std::vector<ci::vec3>& normals);
 	void bindNormals(const float* normals, const int size);
 
-	void bindTexCoords(const std::vector<ci::Vec2f>& texCoords);
+	void bindTexCoords(const std::vector<ci::vec2>& texCoords);
 	void bindTexCoords(const float* texCoords, const int size);
 
-	void bindTangents(const std::vector<ci::Vec3f>& tangents);
+	void bindTangents(const std::vector<ci::vec3>& tangents);
 	void bindTangents(const float* tangents, const int size);
 
 	void bindMiscValues(const std::vector<float>& values);

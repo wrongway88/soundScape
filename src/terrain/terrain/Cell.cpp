@@ -3,7 +3,7 @@
 #include "terrain/utility/StlVectorUtility.h"
 #include "LookUpTables.h"
 
-Cell::Cell(ci::Vec3f& center, float size):
+Cell::Cell(const ci::vec3& center, const float size):
 	m_cube(center, size),
 	m_activeNeighbourCenters()
 {
@@ -59,8 +59,8 @@ void Cell::sampleTerrain(IDensityFunction& densityFunction, std::map<int, Edge>&
 		{
 			int edgeIndex = foo[i].m_order[j];
 
-			ci::Vec3f vertex;
-			ci::Vec3f normal;
+			ci::vec3 vertex;
+			ci::vec3 normal;
 
 			if(edgeIndex == 12)
 			{
@@ -73,8 +73,8 @@ void Cell::sampleTerrain(IDensityFunction& densityFunction, std::map<int, Edge>&
 			{
 				EdgeIndex edge = Cube::getEdgeIndices((unsigned int)edgeIndex);
 
-				ci::Vec3f v0 = m_cube.getVertex((unsigned int)edge.m_v0);
-				ci::Vec3f v1 = m_cube.getVertex((unsigned int)edge.m_v1);
+				ci::vec3 v0 = m_cube.getVertex((unsigned int)edge.m_v0);
+				ci::vec3 v1 = m_cube.getVertex((unsigned int)edge.m_v1);
 
 				int hashValue = calculateEdgeHashValue(v0, v1, terrainSize, int(terrainSize/m_cube.getSize())+1);
 
@@ -105,7 +105,7 @@ void Cell::sampleTerrain(IDensityFunction& densityFunction, std::map<int, Edge>&
 				}
 			}
 
-			int idx = StlVectorUtility::find<ci::Vec3f>(m_vertices, vertex);
+			int idx = StlVectorUtility::find<ci::vec3>(m_vertices, vertex);
 
 			if(idx != -1)
 			{
@@ -136,7 +136,8 @@ unsigned int Cell::calculateVertexCase(IDensityFunction& densityFunction)
 
 	for(unsigned int i = 0; i < 8; i++)
 	{
-		densities[i] = densityFunction.getValue(m_cube.getVertex(i));
+		ci::vec3 vec = m_cube.getVertex(i);
+		densities[i] = densityFunction.getValue(vec);
 
 		if(densities[i] > 0.0f)
 		{
@@ -147,7 +148,7 @@ unsigned int Cell::calculateVertexCase(IDensityFunction& densityFunction)
 	return vertexCase;
 }
 
-std::vector<ci::Vec3f> Cell::getVertices()
+std::vector<ci::vec3> Cell::getVertices()
 {
 	return m_vertices;
 }
@@ -157,17 +158,17 @@ std::vector<unsigned int> Cell::getIndices()
 	return m_indices;
 }
 
-std::vector<ci::Vec3f> Cell::getNormals()
+std::vector<ci::vec3> Cell::getNormals()
 {
 	return m_normals;
 }
 
-std::vector<ci::Vec3f> Cell::getActiveNeighbourCenters()
+std::vector<ci::vec3> Cell::getActiveNeighbourCenters()
 {
 	return m_activeNeighbourCenters;
 }
 
-ci::Vec3f Cell::interpolateVertexPosition(ci::Vec3f vector0, float weight0, ci::Vec3f vector1, float weight1)
+ci::vec3 Cell::interpolateVertexPosition(ci::vec3 vector0, float weight0, ci::vec3 vector1, float weight1)
 {
 	float dist = std::fabs(weight0) + std::fabs(weight1);
 
@@ -177,24 +178,24 @@ ci::Vec3f Cell::interpolateVertexPosition(ci::Vec3f vector0, float weight0, ci::
 	return vector0*w0 + vector1*w1;
 }
 
-ci::Vec3f Cell::calculateNormal(ci::Vec3f& position, IDensityFunction& densityFunction)
+ci::vec3 Cell::calculateNormal(ci::vec3& position, IDensityFunction& densityFunction)
 {
-	ci::Vec3f normal;
+	ci::vec3 normal;
 	float cellSize = m_cube.getSize();// * 0.01f;
 
-	normal.x = densityFunction.getValue(ci::Vec3f(position.x + cellSize, position.y, position.z)) -
-				densityFunction.getValue(ci::Vec3f(position.x - cellSize, position.y, position.z));
-	normal.y = densityFunction.getValue(ci::Vec3f(position.x, position.y + cellSize, position.z)) -
-				densityFunction.getValue(ci::Vec3f(position.x, position.y - cellSize, position.z));
-	normal.z = densityFunction.getValue(ci::Vec3f(position.x, position.y, position.z + cellSize)) -
-				densityFunction.getValue(ci::Vec3f(position.x, position.y, position.z - cellSize));
+	normal.x = densityFunction.getValue(ci::vec3(position.x + cellSize, position.y, position.z)) -
+				densityFunction.getValue(ci::vec3(position.x - cellSize, position.y, position.z));
+	normal.y = densityFunction.getValue(ci::vec3(position.x, position.y + cellSize, position.z)) -
+				densityFunction.getValue(ci::vec3(position.x, position.y - cellSize, position.z));
+	normal.z = densityFunction.getValue(ci::vec3(position.x, position.y, position.z + cellSize)) -
+				densityFunction.getValue(ci::vec3(position.x, position.y, position.z - cellSize));
 
-	return (normal.normalized() * -1.0f);
+	return (ci::normalize(normal) * -1.0f);
 }
 
 void Cell::calculateFaceSaddlePoints(float densities[])
 {
-	std::vector<ci::Vec2f> faceVertices;
+	std::vector<ci::vec2> faceVertices;
 	std::vector<unsigned int> faceIndices;
 
 	for(unsigned int i = 0; i < 6; i++)
@@ -225,7 +226,7 @@ void Cell::calculateFaceSaddlePoints(float densities[])
 void Cell::calculateBodySaddlePoints(float densities[])
 {
 	CubeCornerValues cubeCornerValues(densities[0], densities[1], densities[2], densities[3], densities[4], densities[5], densities[6], densities[7]);
-	std::vector<ci::Vec3f> saddlePoints = TerrainUtility::calculateBodySaddlePoints(m_cube.getVertex(0), m_cube.getVertex(6), cubeCornerValues);
+	std::vector<ci::vec3> saddlePoints = TerrainUtility::calculateBodySaddlePoints(m_cube.getVertex(0), m_cube.getVertex(6), cubeCornerValues);
 
 	for(unsigned int i = 0;i < saddlePoints.size(); i++)
 	{
@@ -240,7 +241,7 @@ void Cell::calculateBodySaddlePoints(float densities[])
 
 void Cell::calculateActiveNeighbours(float densities[])
 {
-	std::vector<ci::Vec3f> neighbourCenters;
+	std::vector<ci::vec3> neighbourCenters;
 	std::vector<unsigned int> faceIndices;
 	
 	for(unsigned int i = 0; i < 6; i++)
@@ -261,29 +262,29 @@ void Cell::calculateActiveNeighbours(float densities[])
 			switch(i)
 			{
 			case 0:
-				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::Vec3f(0.0f, 0.0f, -m_cube.getSize()));
+				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::vec3(0.0f, 0.0f, -m_cube.getSize()));
 				break;
 			case 1:
-				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::Vec3f(m_cube.getSize(), 0.0f, 0.0f));
+				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::vec3(m_cube.getSize(), 0.0f, 0.0f));
 				break;
 			case 2:
-				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::Vec3f(0.0f, 0.0f, m_cube.getSize()));
+				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::vec3(0.0f, 0.0f, m_cube.getSize()));
 				break;
 			case 3:
-				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::Vec3f(-m_cube.getSize(), 0.0f, 0.0f));
+				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::vec3(-m_cube.getSize(), 0.0f, 0.0f));
 				break;
 			case 4:
-				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::Vec3f(0.0f, -m_cube.getSize(), 0.0f));
+				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::vec3(0.0f, -m_cube.getSize(), 0.0f));
 				break;
 			case 5:
-				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::Vec3f(0.0f, m_cube.getSize(), 0.0f));
+				m_activeNeighbourCenters.push_back(m_cube.getCenter() + ci::vec3(0.0f, m_cube.getSize(), 0.0f));
 				break;
 			}
 		}
 	}
 }
 
-int Cell::calculateEdgeHashValue(const ci::Vec3f& v0, const ci::Vec3f& v1, float terrainSize, int vertexCount1d)
+int Cell::calculateEdgeHashValue(const ci::vec3& v0, const ci::vec3& v1, float terrainSize, int vertexCount1d)
 {
 	float cubeSize = m_cube.getSize();
 
@@ -915,9 +916,9 @@ bool Cell::testInterior(const unsigned int vertexCase, const unsigned int config
 	return testCase<0;
 }
 
-ci::Vec3f Cell::calculateInnerVertex(const float densities[8])
+ci::vec3 Cell::calculateInnerVertex(const float densities[8])
 {
-	std::vector<ci::Vec3f> edgeVertices;
+	std::vector<ci::vec3> edgeVertices;
 
 	for(unsigned int i = 0; i < 12; i++)
 	{
@@ -927,15 +928,15 @@ ci::Vec3f Cell::calculateInnerVertex(const float densities[8])
 
 		if((d0 * d1) < 0.0f) //check if only one value is below 0
 		{
-			ci::Vec3f v0 = m_cube.getVertex(edge.m_v0);
-			ci::Vec3f v1 = m_cube.getVertex(edge.m_v1);
+			ci::vec3 v0 = m_cube.getVertex(edge.m_v0);
+			ci::vec3 v1 = m_cube.getVertex(edge.m_v1);
 
-			ci::Vec3f vertex = interpolateVertexPosition(v0, d0, v1, d1);
+			ci::vec3 vertex = interpolateVertexPosition(v0, d0, v1, d1);
 			edgeVertices.push_back(vertex);
 		}
 	}
 
-	ci::Vec3f result;
+	ci::vec3 result;
 	for(unsigned int i = 0; i < edgeVertices.size(); i++)
 	{
 		result += edgeVertices[i];

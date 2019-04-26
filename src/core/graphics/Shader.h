@@ -19,10 +19,10 @@ public:
 
 	void setUniform(const std::string& name, int value);
 	void setUniform(const std::string& name, float value);
-	void setUniform(const std::string& name, const ci::Vec3f& value);
-	void setUniform(const std::string& name, const ci::Vec4f& value);
-	void setUniform(const std::string& name, const ci::Matrix33f& value, bool transpose);
-	void setUniform(const std::string& name, const ci::Matrix44f& value, bool transpose);
+	void setUniform(const std::string& name, const ci::vec3& value);
+	void setUniform(const std::string& name, const ci::vec4& value);
+	void setUniform(const std::string& name, const ci::mat3& value, bool transpose);
+	void setUniform(const std::string& name, const ci::mat4& value, bool transpose);
 
 	void bindAttribute(const GLuint index, const std::string& name);
 	void bindFragDataLocation(const GLuint index, const std::string& name);

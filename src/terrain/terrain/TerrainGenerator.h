@@ -17,14 +17,14 @@ public:
 
 	Terrain* generateTerrain(IDensityFunction& densityFunction, float terrainSize, float cellSize);
 
-	Terrain* generateTerrain(IDensityFunction& densityFunction, float terrainSize, float cellSize, const ci::Vec3i& seedCell);
+	Terrain* generateTerrain(IDensityFunction& densityFunction, float terrainSize, float cellSize, const ci::vec3& seedCell);
 
-	ci::Vec3i findSeedCell(IDensityFunction& densityFunction, float terrainSize, float cellSize);
+	ci::vec3 findSeedCell(IDensityFunction& densityFunction, float terrainSize, float cellSize);
 
 private:
 	void initializeVisitedCells(int size);
-	void addTriangles(std::vector<ci::Vec3f>& vertices, std::vector<unsigned int>& indices, std::vector<ci::Vec3f>& normals,
-						std::vector<ci::Vec3f>& cellVertices, std::vector<unsigned int>& cellIndices, std::vector<ci::Vec3f>& cellNormals);
+	void addTriangles(std::vector<ci::vec3>& vertices, std::vector<unsigned int>& indices, std::vector<ci::vec3>& normals,
+						std::vector<ci::vec3>& cellVertices, std::vector<unsigned int>& cellIndices, std::vector<ci::vec3>& cellNormals);
 
 	std::vector<std::vector<std::vector<bool> > > m_visitedCells;
 	int m_visitedCellsSize;

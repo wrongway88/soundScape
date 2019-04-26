@@ -18,11 +18,11 @@ MeshBufferObject::~MeshBufferObject()
 	glDeleteBuffers(1, &m_MiscValues2);
 }
 
-void MeshBufferObject::bindVertices(const std::vector<ci::Vec3f>& vertices)
+void MeshBufferObject::bindVertices(const std::vector<ci::vec3>& vertices)
 {
 	glBindVertexArray(m_Mesh);
 	glBindBuffer(GL_ARRAY_BUFFER, m_Vertices);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(ci::Vec3f), &vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(ci::vec3), &vertices[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(0);
 
@@ -70,11 +70,11 @@ void MeshBufferObject::bindIndices(const int* indices, const int size)
 }
 
 
-void MeshBufferObject::bindNormals(const std::vector<ci::Vec3f>& normals)
+void MeshBufferObject::bindNormals(const std::vector<ci::vec3>& normals)
 {
 	glBindVertexArray(m_Mesh);
 	glBindBuffer(GL_ARRAY_BUFFER, m_Normals);
-	glBufferData(GL_ARRAY_BUFFER, normals.size()*sizeof(ci::Vec3f), &normals[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, normals.size()*sizeof(ci::vec3), &normals[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(1);
 
@@ -97,11 +97,11 @@ void MeshBufferObject::bindNormals(const float* normals, const int size)
 }
 
 
-void MeshBufferObject::bindTexCoords(const std::vector<ci::Vec2f>& texCoords)
+void MeshBufferObject::bindTexCoords(const std::vector<ci::vec2>& texCoords)
 {
 	glBindVertexArray(m_Mesh);
 	glBindBuffer(GL_ARRAY_BUFFER, m_TexCoords);
-	glBufferData(GL_ARRAY_BUFFER, texCoords.size()*sizeof(ci::Vec2f), &texCoords[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, texCoords.size()*sizeof(ci::vec2), &texCoords[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(2);
 
@@ -123,11 +123,11 @@ void MeshBufferObject::bindTexCoords(const float* texCoords, const int size)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void MeshBufferObject::bindTangents(const std::vector<ci::Vec3f>& tangents)
+void MeshBufferObject::bindTangents(const std::vector<ci::vec3>& tangents)
 {
 	glBindVertexArray(m_Mesh);
 	glBindBuffer(GL_ARRAY_BUFFER, m_Tangents);
-	glBufferData(GL_ARRAY_BUFFER, tangents.size()*sizeof(ci::Vec3f), &tangents[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, tangents.size()*sizeof(ci::vec3), &tangents[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(3);
 

@@ -9,7 +9,7 @@ public:
 	IDensityFunction();
 	virtual ~IDensityFunction() = 0;
 
-	virtual float getValue(ci::Vec3f& position) const = 0;
+	virtual float getValue(const ci::vec3& position) const = 0;
 };
 
 #endif

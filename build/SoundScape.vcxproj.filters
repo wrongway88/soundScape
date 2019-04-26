@@ -13,6 +13,24 @@
     <Filter Include="sound">
       <UniqueIdentifier>{34290768-fe11-4897-88ab-fec42c562653}</UniqueIdentifier>
     </Filter>
+    <Filter Include="terrain">
+      <UniqueIdentifier>{e5c36555-533b-4085-b7dc-0a2b0cdec969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="terrain\common">
+      <UniqueIdentifier>{8be0896a-0864-41b4-817e-f6d94f089c06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="terrain\terrain">
+      <UniqueIdentifier>{c08542b6-7c96-4d26-86f8-fa08c27e9744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="terrain\utility">
+      <UniqueIdentifier>{1b087991-10a7-4dc4-9c0a-12049cc49909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="terrain\densityFunction">
+      <UniqueIdentifier>{bdd8c3e9-4ac1-4fbc-830a-e94b3bb07f87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\graphics">
+      <UniqueIdentifier>{2a8646e5-c6a0-46ed-bb3f-ade3cd697f26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\SoundScape.cpp" />
@@ -36,6 +54,54 @@
     </ClCompile>
     <ClCompile Include="..\src\sound\WaveExtractor.cpp">
       <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\common\Cube.cpp">
+      <Filter>terrain\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\common\Triangle.cpp">
+      <Filter>terrain\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionHeightMap.cpp">
+      <Filter>terrain\densityFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionSinCos.cpp">
+      <Filter>terrain\densityFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionSinCosComplex.cpp">
+      <Filter>terrain\densityFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionVolumeMap.cpp">
+      <Filter>terrain\densityFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\densityFunction\IDensityFunction.cpp">
+      <Filter>terrain\densityFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\utility\StlVectorUtility.cpp">
+      <Filter>terrain\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\terrain\Cell.cpp">
+      <Filter>terrain\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\terrain\LookUpTables.cpp">
+      <Filter>terrain\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\terrain\Terrain.cpp">
+      <Filter>terrain\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\terrain\TerrainGenerator.cpp">
+      <Filter>terrain\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\terrain\TerrainUtility.cpp">
+      <Filter>terrain\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\graphics\MeshBufferObject.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\graphics\Shader.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\terrain\densityFunction\DensityFunctionSpectrumSimple.cpp">
+      <Filter>terrain\densityFunction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +132,54 @@
     </ClInclude>
     <ClInclude Include="..\src\sound\WaveExtractor.h">
       <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\common\Cube.h">
+      <Filter>terrain\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\common\Triangle.h">
+      <Filter>terrain\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionHeightMap.h">
+      <Filter>terrain\densityFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionSinCos.h">
+      <Filter>terrain\densityFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionSinCosComplex.h">
+      <Filter>terrain\densityFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionVolumeMap.h">
+      <Filter>terrain\densityFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\densityFunction\IDensityFunction.h">
+      <Filter>terrain\densityFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\utility\StlVectorUtility.h">
+      <Filter>terrain\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\terrain\Cell.h">
+      <Filter>terrain\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\terrain\LookUpTables.h">
+      <Filter>terrain\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\terrain\Terrain.h">
+      <Filter>terrain\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\terrain\TerrainGenerator.h">
+      <Filter>terrain\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\terrain\TerrainUtility.h">
+      <Filter>terrain\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\graphics\MeshBufferObject.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\graphics\Shader.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\terrain\densityFunction\DensityFunctionSpectrumSimple.h">
+      <Filter>terrain\densityFunction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

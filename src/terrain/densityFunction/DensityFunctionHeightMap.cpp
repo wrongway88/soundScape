@@ -11,9 +11,9 @@ DensityFunctionHeightMap::~DensityFunctionHeightMap()
 {
 }
 
-float DensityFunctionHeightMap::getValue(ci::Vec3f& position) const
+float DensityFunctionHeightMap::getValue(const ci::vec3& position) const
 {
-	ci::Vec2f uv(position.x/m_terrainSize.x, position.z/m_terrainSize.y);
+	ci::vec2 uv(position.x/m_terrainSize.x, position.z/m_terrainSize.y);
 
 	float x = m_heightMap.getWidth();
 	float y = m_heightMap.getHeight();
@@ -29,12 +29,12 @@ float DensityFunctionHeightMap::getValue(ci::Vec3f& position) const
 	int iX1 = (int)x + 1;
 	int iY1 = (int)y + 1;
 
-	float v0 = (m_heightMap.getPixel(ci::Vec2i(iX0, iY0)).r + m_heightMap.getPixel(ci::Vec2i(iX1, iY0)).r) * 0.5f;
-	float v1 = (m_heightMap.getPixel(ci::Vec2i(iX0, iY1)).r + m_heightMap.getPixel(ci::Vec2i(iX1, iY1)).r) * 0.5f;
+	float v0 = (m_heightMap.getPixel(ci::vec2(iX0, iY0)).r + m_heightMap.getPixel(ci::vec2(iX1, iY0)).r) * 0.5f;
+	float v1 = (m_heightMap.getPixel(ci::vec2(iX0, iY1)).r + m_heightMap.getPixel(ci::vec2(iX1, iY1)).r) * 0.5f;
 
 	float v2 = (v0 + v1) * 0.5f;
 
-	//float value = m_heightMap.getPixel(Vec2i((int)x, (int)y)).r * 16.0f;
+	//float value = m_heightMap.getPixel(vec2((int)x, (int)y)).r * 16.0f;
 	float value = v2 * m_altitudeScale;
 
 	return -position.y + value;

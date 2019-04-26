@@ -8,7 +8,7 @@ DensityFunctionSinCosComplex::~DensityFunctionSinCosComplex()
 {
 }
 
-float DensityFunctionSinCosComplex::getValue(ci::Vec3f& position) const
+float DensityFunctionSinCosComplex::getValue(const ci::vec3& position) const
 {
 	float density = -position.y;
 	density += std::sin(position.x);

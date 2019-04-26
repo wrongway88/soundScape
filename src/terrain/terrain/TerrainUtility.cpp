@@ -270,7 +270,7 @@ const VertexOrderCase TerrainUtility::m_edgeConnectList[] = {
 																VertexOrderCase(VertexOrder(-1, -1, -1),VertexOrder(-1, -1, -1),VertexOrder(-1, -1, -1),VertexOrder(-1, -1, -1),VertexOrder(-1, -1, -1))
 															};
 
-float TerrainUtility::interpolate(ci::Vec2f& position, ci::Vec2f& vertex00, ci::Vec2f& vertex11, float value00, float value10, float value01, float value11)
+float TerrainUtility::interpolate(ci::vec2& position, ci::vec2& vertex00, ci::vec2& vertex11, float value00, float value10, float value01, float value11)
 {
 	float x0 = vertex00.x;
 	float y0 = vertex00.y;
@@ -308,7 +308,7 @@ float TerrainUtility::interpolate(ci::Vec2f& position, ci::Vec2f& vertex00, ci::
 	return result;
 }
 
-float TerrainUtility::interpolate(ci::Vec3f& position, ci::Vec3f& vertex000, ci::Vec3f& vertex111, CubeCornerValues& cubeCornerValues)
+float TerrainUtility::interpolate(ci::vec3& position, ci::vec3& vertex000, ci::vec3& vertex111, CubeCornerValues& cubeCornerValues)
 {
 	float x0 = vertex000.x;
 	float y0 = vertex000.y;
@@ -372,7 +372,7 @@ float TerrainUtility::interpolate(ci::Vec3f& position, ci::Vec3f& vertex000, ci:
 	return result;
 }
 
-ci::Vec2f TerrainUtility::calculateFaceSaddlePoint(ci::Vec2f& vertex00, ci::Vec2f& vertex11, float value00, float value10, float value01, float value11)
+ci::vec2 TerrainUtility::calculateFaceSaddlePoint(ci::vec2& vertex00, ci::vec2& vertex11, float value00, float value10, float value01, float value11)
 {
 	float a = value00 - value10 - value01 + value11;
 	float b = value01 - value00;
@@ -382,12 +382,12 @@ ci::Vec2f TerrainUtility::calculateFaceSaddlePoint(ci::Vec2f& vertex00, ci::Vec2
 	float x = a + c;
 	float y = a + b;
 
-	return ci::Vec2f(x, y);
+	return ci::vec2(x, y);
 }
 
-std::vector<ci::Vec3f> TerrainUtility::calculateBodySaddlePoints(ci::Vec3f& vertex000, ci::Vec3f& vertex111, CubeCornerValues& cubeCornerValues)
+std::vector<ci::vec3> TerrainUtility::calculateBodySaddlePoints(const ci::vec3& vertex000, const ci::vec3& vertex111, const CubeCornerValues& cubeCornerValues)
 {
-	std::vector<ci::Vec3f> result;
+	std::vector<ci::vec3> result;
 
 	float a = cubeCornerValues.m_value6 - cubeCornerValues.m_value2 - cubeCornerValues.m_value7 - cubeCornerValues.m_value5 + cubeCornerValues.m_value3 + cubeCornerValues.m_value1 + cubeCornerValues.m_value4 - cubeCornerValues.m_value0;
 	float b = cubeCornerValues.m_value2 - cubeCornerValues.m_value3 - cubeCornerValues.m_value1 + cubeCornerValues.m_value0;
@@ -416,10 +416,10 @@ std::vector<ci::Vec3f> TerrainUtility::calculateBodySaddlePoints(ci::Vec3f& vert
 	float y0 = (1.0f/a) * std::sqrt(ySquare);
 	float z0 = (1.0f/a) * std::sqrt(zSquare);
 
-	ci::Vec3f v(x0, y0, z0);
-	ci::Vec3f m((1.0f/a)*-c, (1.0f/a)*-d, (1.0f/a)*-b);
-	ci::Vec3f s0 = m - v;
-	ci::Vec3f s1 = m + v;
+	ci::vec3 v(x0, y0, z0);
+	ci::vec3 m((1.0f/a)*-c, (1.0f/a)*-d, (1.0f/a)*-b);
+	ci::vec3 s0 = m - v;
+	ci::vec3 s1 = m + v;
 
 	//if(s0.x != 
 	result.push_back(s0);

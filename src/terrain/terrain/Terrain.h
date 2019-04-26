@@ -8,27 +8,27 @@
 class Terrain
 {
 public:
-	Terrain(std::vector<ci::Vec3f>& vertices, std::vector<unsigned int>& indices, std::vector<ci::Vec3f>& normals);
+	Terrain(std::vector<ci::vec3>& vertices, std::vector<unsigned int>& indices, std::vector<ci::vec3>& normals);
 	~Terrain();
 
-	std::vector<ci::Vec3f> getVertices() const;
+	std::vector<ci::vec3> getVertices() const;
 	std::vector<unsigned int> getIndices() const;
-	std::vector<ci::Vec3f> getNormals() const;
-	std::vector<ci::Vec2f> getTextureCoordinates() const;
+	std::vector<ci::vec3> getNormals() const;
+	std::vector<ci::vec2> getTextureCoordinates() const;
 
-	ci::Vec3f getVertex(const unsigned int idx) const;
+	ci::vec3 getVertex(const unsigned int idx) const;
 	unsigned int getIndex(const unsigned int idx) const;
-	ci::Vec3f getNormal(const unsigned int idx) const;
-	ci::Vec2f getTextureCoordinate(const unsigned int idx) const;
+	ci::vec3 getNormal(const unsigned int idx) const;
+	ci::vec2 getTextureCoordinate(const unsigned int idx) const;
 
 	int getCubesPerDimension() const;
 	void setCubesPerDimension(const int cubesPerDimension);
 
 private:
-	std::vector<ci::Vec3f> m_vertices;
+	std::vector<ci::vec3> m_vertices;
 	std::vector<unsigned int> m_indices;
-	std::vector<ci::Vec3f> m_normals;
-	std::vector<ci::Vec2f> m_textureCoordinates;
+	std::vector<ci::vec3> m_normals;
+	std::vector<ci::vec2> m_textureCoordinates;
 
 	int m_cubesPerDimension;
 };
